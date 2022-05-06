@@ -15,6 +15,7 @@ var game_state_manager =
 		game.intro_state = ['story_intro', 'settings'];
 		game.action_state = ['game_info', 'map', 'settings'];
 		game.confirm_action_state = ['game_info','action_confirmation', 'settings'];
+		game.year_end_state = ['year_end', 'settings'];
 	},
 	
 	setup_page: function()

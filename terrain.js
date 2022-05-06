@@ -7,6 +7,7 @@ var terrain =
 			index: index,
 			item_text: "",
 			image_onclick: `terrain.show_terrain_info(${index})`,
+			type: type,
 			actions: []
 		}
 		
@@ -49,12 +50,15 @@ var terrain =
 			case terrain_types.forest:
 				t.terrain_name = "Forest";
 				t.image_file_name = "forest.png";
+				t.actions.push("collect_wood");
 				break;
 				
 			case terrain_types.field:
 			default:
 				t.terrain_name = "Field";
 				t.image_file_name = "field.png";
+				t.actions.push("create_young_forest");
+				t.actions.push("create_pumpkin_patch");
 				t.actions.push("create_settlement");
 				break;
 		}
@@ -75,7 +79,13 @@ var terrain =
 			var disabled_onclick = eligible ? `onclick="actions['${selected_terrain.actions[i]}'].redemption_function(${index})"` : 'disabled';
 			var disabled_styling = eligible ? 'green_color' : 'yellow_color';
 			
-			action_content += `<p><button ${disabled_onclick}>${action.name}: ${action.desc} - <span style="color: var(--${disabled_styling})">Requires ${action.food_cost} food, ${action.wood_cost} wood.</span></button></p>`;
+			var requires_text = `Requires ${action.food_cost} food, ${action.wood_cost} wood.`;
+			if (action.custom_requires_text != "")
+			{
+				requires_text = action.custom_requires_text
+			}
+			
+			action_content += `<p><button ${disabled_onclick}>${action.name}: ${action.desc} - <span style="color: var(--${disabled_styling})">${requires_text}</span></button></p>`;
 		}			
 		$('#action_content').html(action_content);
 		game.load_state('confirm_action_state');
