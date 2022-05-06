@@ -20,10 +20,12 @@ var actions =
 			custom_requires_text: custom_requires_text,
 			redemption_function: function(terrain_index)
 			{
+				$('#daily_action_log').html('');
 				game_stats.wood -= this.wood_cost;
 				game_stats.food -= this.food_cost;
 				game_stats.days_until_winter -= 1;
 				this.special_redemption_function(terrain_index);
+				map.perform_daily_actions();
 				game_stats.show_game_info();
 				if (game_stats.days_until_winter > 0)
 				{
@@ -51,10 +53,28 @@ var actions =
 			"Build Settlement", "Creates a settlement", 3, 0, terrain_types.settlement
 		);
 		
+		this.create_factory = this.new_action(
+			"Build Factory", "Creates a factory. Factories consume 1 wood and produce 2 food and 1 carbon every day.", 3, 0, terrain_types.factory
+		);
+		
 		this.collect_wood = this.new_action_ext(
-			"Collect Wood", "Produces 1 wood per settlement per forest.", 0, 0,
+			"Harvest Wood", "Produces 1 wood per settlement per forest.", 0, 0,
 			function() { return map.terrain_count(terrain_types.forest) > 0 && map.terrain_count(terrain_types.settlement) > 0; },
-			function() { game_stats.wood += map.terrain_count(terrain_types.forest)*map.terrain_count(terrain_types.settlement); },
+			function() { game_stats.wood += map.terrain_count(terrain_types.forest)*map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("You harvested some wood."); },
+			"Requires at least 1 settlement and 1 forest."
+		);
+		
+		this.collect_pumpkins = this.new_action_ext(
+			"Harvest Pumpkins", "Produces 1 food per settlement per pumpkin patch.", 0, 0,
+			function() { return map.terrain_count(terrain_types.pumpkin_patch) > 0 && map.terrain_count(terrain_types.settlement) > 0; },
+			function() { game_stats.food += map.terrain_count(terrain_types.pumpkin_patch)*map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("You harvested some pumpkins."); },
+			"Requires at least 1 settlement and 1 pumpkin patch."
+		);
+		
+		this.consume_forest = this.new_action_ext(
+			"Consume Forest", "Destroys the forest, producing 15 wood.", 0, 0,
+			function() { return true; },
+			function(terrain_index) { game_stats.wood += 15; map.replace_terrain(terrain_index, terrain_types.crater); game_stats.write_to_action_log("You consumed a forest."); },
 			"Requires at least 1 settlement and 1 forest."
 		);
 	}

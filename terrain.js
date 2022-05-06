@@ -8,7 +8,8 @@ var terrain =
 			item_text: "",
 			image_onclick: `terrain.show_terrain_info(${index})`,
 			type: type,
-			actions: []
+			actions: [],
+			daily_action: null
 		}
 		
 		switch(type)
@@ -25,6 +26,20 @@ var terrain =
 			case terrain_types.factory:
 				t.terrain_name = "Factory";
 				t.image_file_name = "factory.png";
+				t.daily_action = function()
+				{
+					if (game_stats.wood > 1)
+					{
+						game_stats.wood -= 1;
+						game_stats.carbon += 1;
+						game_stats.food += 2;
+						game_stats.write_to_action_log('A factory consumed 1 wood, and produced 1 carbon and 2 food.');
+					}
+					else
+					{
+						game_stats.write_to_action_log('A factory did not have enough wood.');
+					}
+				}
 				break;
 			
 			case terrain_types.mine:
@@ -35,6 +50,7 @@ var terrain =
 			case terrain_types.pumpkin_patch:
 				t.terrain_name = "Pumpkin Patch";
 				t.image_file_name = "pumpkin_patch.png";
+				t.actions.push("collect_pumpkins");
 				break;
 			
 			case terrain_types.settlement:
@@ -51,6 +67,7 @@ var terrain =
 				t.terrain_name = "Forest";
 				t.image_file_name = "forest.png";
 				t.actions.push("collect_wood");
+				t.actions.push("consume_forest");
 				break;
 				
 			case terrain_types.field:
@@ -60,6 +77,7 @@ var terrain =
 				t.actions.push("create_young_forest");
 				t.actions.push("create_pumpkin_patch");
 				t.actions.push("create_settlement");
+				t.actions.push("create_factory");
 				break;
 		}
 		

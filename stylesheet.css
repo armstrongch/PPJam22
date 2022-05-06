@@ -54,6 +54,10 @@ button:hover {
 	max-width: 100%;
 }
 
+.item_image_full:hover {
+	outline: 1px solid var(--white_color);
+}
+
 select, option {
 	border: 1px solid var(--white_color);
 	background-color: var(--dark_color);
