@@ -1,0 +1,75 @@
+:root {
+	--dark_color: #3D405B; /* rgb(61, 64, 91) */
+	--white_color: #F4F1DE; /* rgb(244, 241, 222) */
+	--yellow_color: #F2CC8F; /* rgb(242, 204, 143) */
+	--green_color: #81B29A; /* rgb(129, 178, 154) */
+	--orange_color: #e07a5f; /* rgb(224, 122, 95) */
+}
+
+body {
+	background-color: var(--dark_color);
+	color: var(--white_color);
+	font-size: large;
+}
+
+table {
+	width: 100%;
+	border-spacing: 10px;
+	table-layout: fixed;
+}
+
+tr {
+	width: 100%;
+	text-align: center;
+}
+
+td {
+	padding: 10px;
+	text-align: center;
+	outline: 1px solid var(--white_color);
+}
+
+button, input {
+	border: 1px solid var(--white_color);
+	background-color: var(--dark_color);
+	color: var(--white_color);
+	padding: 5px;
+	font-size: large;
+	cursor: pointer;
+}
+
+button:hover {
+	border: 1px solid var(--dark_color);
+	background-color: var(--white_color);
+	color: var(--dark_color);
+}
+
+.list_item_text {
+	text-align: left;
+	text-align: left;
+}
+
+.item_image_full {
+	max-height: 12vh;
+	max-width: 100%;
+}
+
+select, option {
+	border: 1px solid var(--white_color);
+	background-color: var(--dark_color);
+	color: var(--white_color);
+	padding: 5px;
+	font-size: large;
+}
+
+option:checked {
+	border: 1px solid var(--dark_color);
+	background-color: var(--white_color);
+	color: var(--dark_color);
+}
+
+/*adding this to center images? hope it doesn't f*ck something else up lol.*/
+div {
+	display: flex;
+	justify-content: center;
+}

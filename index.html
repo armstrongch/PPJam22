@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <link rel="stylesheet" href="stylesheet.css" type="text/css" />
+    <meta name="author" content="Chris Turd Boomerang Armstrong" />
+    <title>Bounty of the Pumpkin Planet</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  </head>
+  <body onload="game_state_manager.setup_game()">
+	
+	<table style='display: none'>
+		<tr id='loading'>
+			<td colspan='12'>
+				<p>Loading</p>
+			</td>
+		</tr>
+		<tr id='title'>
+			<td colspan='12'>
+				<h1>Bounty of the Pumpkin Planet</h1>
+				<p>A game by Chris 'Turd Boomerang' Armstrong</p>
+				<button onclick="game_state_manager.begin_game_button()">Begin</button>
+				<span id='load_button'></span>
+			</td>
+		</tr>
+		<tr id='story_intro'>
+			<td colspan='12'>
+				<p>Here is the story intro</p>
+				<button onclick="game.load_state('action_state')">Continue</button>
+			</td>
+		</tr>
+		<tr id='game_info'>
+			<td colspan='12'>
+				<p>Here is some game info</p>
+			</td>
+		</tr>
+		<tr id='map'>
+			<td colspan='3'>
+			<!--Generated Content Goes Here-->	
+			</td>
+			<td colspan='3'>
+			<!--Generated Content Goes Here-->	
+			</td>
+			<td colspan='3'>
+			<!--Generated Content Goes Here-->	
+			</td>
+			<td colspan='3'>
+			<!--Generated Content Goes Here-->	
+			</td>
+		</tr>
+		<tr id='action_confirmation'>
+			<td colspan='12'>
+				<span id='action_content'>
+					<!--Generated Content Goes Here-->	
+				</span>
+				<button onclick="game.load_state('action_state')">Cancel</button>
+			</td>
+		</tr>
+		<tr id='settings'>
+			<td colspan='12'>
+				<p>
+					Settings:
+					<input type='checkbox' id='sound_checkbox' onchange='sound_manager.play_sound_by_name("click")'></input> <label for='sound_checkbox'>Sound</label>
+					<input type='checkbox' id='music_checkbox' onchange='sound_manager.music_toggle_change()'></input> <label for='music_checkbox'>Music</label>
+					<span id='save_button'></span>
+				</p>
+				<span id='failed_to_load'></span>
+			</td>
+		</tr>
+		<tr id='media'>
+			<td colspan='12'>
+				<!--Generated Content Goes Here-->
+			</td>
+		</tr>
+	</table>
+	
+	<script src="Template/jquery.min.js" type="text/javascript"></script>
+	<script src="Template/game.js" type="text/javascript"></script>
+	<script src="Template/save.js" type="text/javascript"></script>
+	<script src="Template/list_item.js" type="text/javascript"></script>
+	<script src="Template/lists.js" type="text/javascript"></script>
+	<script src="Template/sound_manager.js" type="text/javascript"></script>
+	
+	<!--Non-Template Content Below-->
+	<script src="game_state_manager.js" type="text/javascript"></script>
+	<script src="terrain.js" type="text/javascript"></script>
+	<script src="map.js" type="text/javascript"></script>
+	<script src="actions.js" type="text/javascript"></script>
+	<script src="game_stats.js" type="text/javascript"></script>
+  </body>
+</html>
