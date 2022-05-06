@@ -1,12 +1,12 @@
 var terrain = 
 {
-	new_terrain: function(type)
+	new_terrain: function(type, index)
 	{
 		var t = 
 		{
-			index: map.terrain_list.length,
+			index: index,
 			item_text: "",
-			image_onclick: `terrain.show_terrain_info(${map.terrain_list.length})`,
+			image_onclick: `terrain.show_terrain_info(${index})`,
 			actions: []
 		}
 		
@@ -70,8 +70,12 @@ var terrain =
 		for (let i = 0; i < selected_terrain.actions.length; i += 1)
 		{
 			var action = actions[selected_terrain.actions[i]];
+			var eligible = action.eligible_function();
 			
-			action_content += `<p><button>${action.name}: ${action.desc} - Requires ${action.food_cost} food, ${action.wood_cost} wood.</button></p>`;
+			var disabled_onclick = eligible ? `onclick="actions['${selected_terrain.actions[i]}'].redemption_function(${index})"` : 'disabled';
+			var disabled_styling = eligible ? 'green_color' : 'yellow_color';
+			
+			action_content += `<p><button ${disabled_onclick}>${action.name}: ${action.desc} - <span style="color: var(--${disabled_styling})">Requires ${action.food_cost} food, ${action.wood_cost} wood.</span></button></p>`;
 		}			
 		$('#action_content').html(action_content);
 		game.load_state('confirm_action_state');

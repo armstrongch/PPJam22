@@ -24,6 +24,7 @@ var game_state_manager =
 		map.initialize();
 		actions.setup_actions();
 		list_item.AddListItemsToRow('map', map.terrain_list, 'item_image_full');
+		game_stats.show_game_info();
 		
 		this.load_audio(this.complete_setup);
 	},

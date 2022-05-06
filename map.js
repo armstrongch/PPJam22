@@ -13,14 +13,14 @@ var map =
 			}
 			
 			this.terrain_list.push(
-					terrain.new_terrain(type)
+					terrain.new_terrain(type, i)
 				);
 		}
 	},
 	
 	replace_terrain: function(terrain_index, new_type)
 	{
-		this.terrain_list[terrain_index] = terrain.new_terrain(new_type);
+		this.terrain_list[terrain_index] = terrain.new_terrain(new_type, terrain_index);
 		list_item.AddListItemsToRow('map', map.terrain_list, 'item_image_full');
 	}
 };
