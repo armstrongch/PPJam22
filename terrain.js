@@ -26,6 +26,7 @@ var terrain =
 			case terrain_types.factory:
 				t.terrain_name = "Factory";
 				t.image_file_name = "factory.png";
+				t.actions.push("destroy_factory");
 				t.daily_action = function()
 				{
 					if (game_stats.wood > 1)

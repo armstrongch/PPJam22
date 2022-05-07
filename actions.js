@@ -57,6 +57,10 @@ var actions =
 			"Build Factory", "Creates a factory. Factories consume 1 wood and produce 2 food and 1 carbon every day.", 3, 0, terrain_types.factory
 		);
 		
+		this.destroy_factory = this.new_action(
+			"Decomission Factory", "Destroys the factory.", 0, 0, terrain_types.crater
+		);
+		
 		this.collect_wood = this.new_action_ext(
 			"Harvest Wood", "Produces 1 wood per settlement per forest.", 0, 0,
 			function() { return map.terrain_count(terrain_types.forest) > 0 && map.terrain_count(terrain_types.settlement) > 0; },
@@ -75,7 +79,14 @@ var actions =
 			"Consume Forest", "Destroys the forest, producing 15 wood.", 0, 0,
 			function() { return true; },
 			function(terrain_index) { game_stats.wood += 15; map.replace_terrain(terrain_index, terrain_types.crater); game_stats.write_to_action_log("You consumed a forest."); },
-			"Requires at least 1 settlement and 1 forest."
+			""
+		);
+		
+		this.do_nothing = this.new_action_ext(
+			"Do Nothing", "Does Nothing", 0, 0,
+			function() { return true; },
+			function(terrain_index) { /*do nothing*/ },
+			""
 		);
 	}
 };
