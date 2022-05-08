@@ -4,7 +4,7 @@ var game_stats =
 	food: 0,
 	wood: 0,
 	carbon: 0,
-	days_until_winter: 25,
+	days_until_winter: 20,
 	
 	show_game_info: function()
 	{

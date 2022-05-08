@@ -26,15 +26,17 @@ var terrain =
 			case terrain_types.factory:
 				t.terrain_name = "Factory";
 				t.image_file_name = "factory.png";
-				t.actions.push("destroy_factory");
+				t.actions.push("decomission");
 				t.daily_action = function()
 				{
 					if (game_stats.wood > 1)
 					{
 						game_stats.wood -= 1;
-						game_stats.carbon += 1;
-						game_stats.food += 2;
-						game_stats.write_to_action_log('A factory consumed 1 wood, and produced 1 carbon and 2 food.');
+						var carbon_produced = 1 * Math.pow(2, map.terrain_count(terrain_types.mine));
+						var food_produced = carbon_produced * 2;
+						game_stats.carbon += carbon_produced;
+						game_stats.food += food_produced;
+						game_stats.write_to_action_log(`A factory consumed 1 wood, and produced ${carbon_produced} carbon and ${food_produced} food.`);
 					}
 					else
 					{
@@ -46,12 +48,14 @@ var terrain =
 			case terrain_types.mine:
 				t.terrain_name = "Mine";
 				t.image_file_name = "mine.png";
+				t.actions.push("decomission");
 				break;
 			
 			case terrain_types.pumpkin_patch:
 				t.terrain_name = "Pumpkin Patch";
 				t.image_file_name = "pumpkin_patch.png";
 				t.actions.push("collect_pumpkins");
+				t.actions.push("consume_pumpkin_patch");
 				break;
 			
 			case terrain_types.settlement:
@@ -79,6 +83,8 @@ var terrain =
 				t.actions.push("create_pumpkin_patch");
 				t.actions.push("create_settlement");
 				t.actions.push("create_factory");
+				t.actions.push("create_mine");
+				t.actions.push("create_barracks");
 				break;
 		}
 		

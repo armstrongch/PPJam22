@@ -46,19 +46,27 @@ var actions =
 		);
 		
 		this.create_pumpkin_patch = this.new_action(
-			"Plant Pumpkins", "Creates a pumpkin patch, which can be harvested for food.", 0, 0, terrain_types.pumpkin_patch
+			"Plant Pumpkins", "Creates a pumpkin patch, which can be harvested for food.", 1, 1, terrain_types.pumpkin_patch
 		);
 		
 		this.create_settlement = this.new_action(
-			"Build Settlement", "Creates a settlement", 3, 0, terrain_types.settlement
+			"Build Settlement", "Creates a settlement", 3, 1, terrain_types.settlement
+		);
+		
+		this.create_barracks = this.new_action(
+			"Build Barracks", "Creates a barracks. During wartime, military strength is based on barracks.", 3, 1, terrain_types.barracks
 		);
 		
 		this.create_factory = this.new_action(
 			"Build Factory", "Creates a factory. Factories consume 1 wood and produce 2 food and 1 carbon every day.", 3, 0, terrain_types.factory
 		);
 		
-		this.destroy_factory = this.new_action(
-			"Decomission Factory", "Destroys the factory.", 0, 0, terrain_types.crater
+		this.create_mine = this.new_action(
+			"Build Mine", "Creates a mine. Mines double the wood and carbon output of factories.", 3, 0, terrain_types.mine
+		);
+		
+		this.decomission = this.new_action(
+			"Decomission", "Destroys this building.", 0, 0, terrain_types.crater
 		);
 		
 		this.collect_wood = this.new_action_ext(
@@ -79,6 +87,13 @@ var actions =
 			"Consume Forest", "Destroys the forest, producing 15 wood.", 0, 0,
 			function() { return true; },
 			function(terrain_index) { game_stats.wood += 15; map.replace_terrain(terrain_index, terrain_types.crater); game_stats.write_to_action_log("You consumed a forest."); },
+			""
+		);
+		
+		this.consume_pumpkin_patch = this.new_action_ext(
+			"Consume Pumpkin Patch", "Destroys the pumpkin patch, producing 30 food.", 0, 0,
+			function() { return true; },
+			function(terrain_index) { game_stats.wood += 30; map.replace_terrain(terrain_index, terrain_types.crater); game_stats.write_to_action_log("You consumed a pumpkin patch."); },
 			""
 		);
 		
