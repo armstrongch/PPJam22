@@ -33,6 +33,7 @@ var actions =
 				}
 				else
 				{
+					game_stats.show_year_end_info();
 					game.load_state('year_end_state');
 				}
 			}
@@ -93,7 +94,7 @@ var actions =
 		this.consume_pumpkin_patch = this.new_action_ext(
 			"Consume Pumpkin Patch", "Destroys the pumpkin patch, producing 30 food.", 0, 0,
 			function() { return true; },
-			function(terrain_index) { game_stats.wood += 30; map.replace_terrain(terrain_index, terrain_types.crater); game_stats.write_to_action_log("You consumed a pumpkin patch."); },
+			function(terrain_index) { game_stats.food += 30; map.replace_terrain(terrain_index, terrain_types.crater); game_stats.write_to_action_log("You consumed a pumpkin patch."); },
 			""
 		);
 		

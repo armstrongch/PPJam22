@@ -29,7 +29,7 @@ var terrain =
 				t.actions.push("decomission");
 				t.daily_action = function()
 				{
-					if (game_stats.wood > 1)
+					if (game_stats.wood >= 1)
 					{
 						game_stats.wood -= 1;
 						var carbon_produced = 1 * Math.pow(2, map.terrain_count(terrain_types.mine));
