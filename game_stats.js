@@ -5,6 +5,7 @@ var game_stats =
 	wood: 0,
 	carbon: 0,
 	days_until_winter: 20,
+	target_food: 60,
 	
 	show_game_info: function()
 	{
@@ -20,9 +21,9 @@ var game_stats =
 	
 	show_year_end_info: function()
 	{
-		var year_end_html = `<p>Year ${this.year} complete. You produced ${this.food} of the required 150 food.</p>`;
+		var year_end_html = `<p>Year ${this.year} complete. You produced ${this.food} of the required ${this.target_food} food.</p>`;
 		
-		if (this.food < 150)
+		if (this.food < this.target_food)
 		{
 			year_end_html += "<p>The pumpkin planet will not be the the fresh start that humanity had hoped for.</p>";
 			year_end_html += "<p><button onclick='location.reload()'>Try Again</button></p>";
@@ -30,7 +31,7 @@ var game_stats =
 		else
 		{
 			this.days_until_winter = 20;
-			this.food -= 150;
+			this.food -= this.target_food;
 			
 			var sapling_count = map.terrain_count(terrain_types.young_forest);
 			if (sapling_count > 0)

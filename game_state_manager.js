@@ -1,7 +1,6 @@
 //This file is part of the game content, NOT part of the template
 var game_state_manager =
 {
-
 	setup_game: function()
 	{
 		this.init_states();

@@ -71,16 +71,16 @@ var actions =
 		);
 		
 		this.collect_wood = this.new_action_ext(
-			"Harvest Wood", "Produces 1 wood per settlement per forest.", 0, 0,
+			"Harvest Wood", "Produces 1 wood per settlement.", 0, 0,
 			function() { return map.terrain_count(terrain_types.forest) > 0 && map.terrain_count(terrain_types.settlement) > 0; },
-			function() { game_stats.wood += map.terrain_count(terrain_types.forest)*map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("You harvested some wood."); },
+			function() { game_stats.wood += map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("You harvested some wood."); },
 			"Requires at least 1 settlement and 1 forest."
 		);
 		
 		this.collect_pumpkins = this.new_action_ext(
-			"Harvest Pumpkins", "Produces 1 food per settlement per pumpkin patch.", 0, 0,
+			"Harvest Pumpkins", "Produces 1 food per settlement.", 0, 0,
 			function() { return map.terrain_count(terrain_types.pumpkin_patch) > 0 && map.terrain_count(terrain_types.settlement) > 0; },
-			function() { game_stats.food += map.terrain_count(terrain_types.pumpkin_patch)*map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("You harvested some pumpkins."); },
+			function() { game_stats.food += map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("You harvested some pumpkins."); },
 			"Requires at least 1 settlement and 1 pumpkin patch."
 		);
 		
