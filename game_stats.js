@@ -12,6 +12,7 @@ var game_stats =
 		$('#game_info_p').html(
 			`Year: ${this.year}&emsp;Food: ${this.food}&emsp;Wood: ${this.wood}&emsp;Carbon: ${this.carbon}&emsp;Days Until Winter: ${this.days_until_winter}`
 		);
+		$('#target_food_span').text(this.target_food);
 	},
 	
 	write_to_action_log: function(text)
