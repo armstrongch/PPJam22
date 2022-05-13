@@ -38,7 +38,7 @@ button, input {
 	cursor: pointer;
 }
 
-button:hover {
+button:hover:enabled {
 	border: 1px solid var(--dark_color);
 	background-color: var(--white_color);
 	color: var(--dark_color);

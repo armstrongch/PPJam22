@@ -2,7 +2,7 @@ var actions =
 {
 	new_action: function(name, desc, wood_cost, food_cost, transform_type)
 	{
-		var eligible_function = function() { return game_stats.wood >= this.wood_cost && game_stats.food >= this.food_cost; };
+		var eligible_function = function() { return (game_stats.wood >= this.wood_cost || this.wood_cost == 0) && (game_stats.food >= this.food_cost || this.food_cost == 0); };
 		var special_redemption_function = function(terrain_index) { map.replace_terrain(terrain_index, transform_type); };
 		
 		return this.new_action_ext(name, desc, wood_cost, food_cost, eligible_function, special_redemption_function, "");

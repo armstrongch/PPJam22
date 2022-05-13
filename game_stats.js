@@ -56,7 +56,7 @@ var game_stats =
 				
 				if (this.carbon > 0)
 				{
-					this.days_until_winter = Math.max(this.days_until_winter - Math.ceil(this.carbon/5), 0);
+					this.days_until_winter = Math.max(this.days_until_winter - Math.floor(this.carbon/5), 0);
 					
 					year_end_html += `<p>The remaining carbon warms the planet. Every 5 units of carbon reduces the length of the 20-day harvest season by 1 day. The next harvest season will last ${this.days_until_winter} days.</p>`;
 				}
