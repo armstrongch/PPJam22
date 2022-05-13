@@ -15,6 +15,7 @@ var game_state_manager =
 		game.action_state = ['game_info', 'map', 'settings'];
 		game.confirm_action_state = ['game_info','action_confirmation', 'settings'];
 		game.year_end_state = ['year_end', 'settings'];
+		game.aliens_negotiations = ['alien_images', 'alien_input', 'settings'];
 	},
 	
 	setup_page: function()

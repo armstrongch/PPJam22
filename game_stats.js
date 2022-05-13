@@ -37,7 +37,7 @@ var game_stats =
 			var sapling_count = map.terrain_count(terrain_types.young_forest);
 			if (sapling_count > 0)
 			{
-				for (let i = 0; i < 16; i += 1)
+				for (let i = 0; i < map.terrain_list.length; i += 1)
 				{
 					if (map.terrain_list[i].type == terrain_types.young_forest)
 					{
@@ -64,7 +64,7 @@ var game_stats =
 			if (this.days_until_winter > 0)
 			{
 				this.year += 1;
-				year_end_html += `<p><button onclick="game.load_state('action_state')">Begin Year ${this.year}</button></p>`;
+				year_end_html += `<p><button onclick="game.load_state('aliens_negotiations')">Begin Year ${this.year}</button></p>`;
 			}
 			else
 			{

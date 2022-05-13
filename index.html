@@ -28,7 +28,6 @@
 					<li>Set-up Itch Page</li>
 					<li>Add Game Ending</li>
 					<li>Add interactions with other colonies</li>
-					<li>New art for other colonies</li>
 					<li>Test and balance different playstyles</li>
 					<li>Quality-of-Life - Hotkeys and/or Automated Action Repetition</li>
 				</ul>
@@ -46,6 +45,48 @@
 		<tr id='year_end'>
 			<td colspan='12'>
 				<span id='year_end_summary'></span>
+			</td>
+		</tr>
+		<tr id='alien_images'>
+			<td colspan='4'>
+				<img src="./Images/alien_frog.png" class='alien_image'>
+			</td>
+			<td colspan='4'>
+				<img src="./Images/alien_squid.png" class='alien_image'>
+			</td>
+			<td colspan='4'>
+				<img src="./Images/alien_bird.png" class='alien_image'>
+			</td>
+		</tr>
+		<tr id='alien_input'>
+			<td colspan='12'>
+				<p>The bounty of the pumpkin planet has attracted colonists from all corners of the galaxy.</p>
+				<form>
+					<p>The froglings have an excess of land. They are willing to give you 4 additional fields, if you can provide them with 90 food at the end of the upcoming harvest season.</p>
+				  
+					<label for="fta">Accept</label>
+					<input type="radio" name ="frog_trade" id="fta" value="accept">
+					
+					<label for="ftr">Reject</label>
+					<input type="radio" name ="frog_trade" id="ftr" value="reject"  checked="checked">
+					
+					<p>The squidlings are constructing weapons of war. Will pay them 40 food as tribute at the end of the upcoming harvest season?</p>
+				  
+					<label for="sta">Pay Tribute</label>
+					<input type="radio" name ="squid_trade" id="sta" value="accept">
+					
+					<label for="str">Prepare for War</label>
+					<input type="radio" name ="squid_trade" id="str" value="reject" checked="checked">
+					
+					<p>The ducklings are perfecting a new carbon-reduction technology. They are willing to reduce your carbon by 20 in exchange for 50 wood at the end of the upcoming harvest season.</p>
+				  
+					<label for="dta">Accept</label>
+					<input type="radio" name ="duck_trade" id="dta" value="accept">
+					
+					<label for="dtr">Reject</label>
+					<input type="radio" name ="duck_trade" id="dtr" value="reject" checked="checked">
+				  
+				</form>
 			</td>
 		</tr>
 		<tr id='game_info'>
@@ -114,5 +155,6 @@
 	<script src="actions.js" type="text/javascript"></script>
 	<script src="game_stats.js" type="text/javascript"></script>
 	<script src="utility.js" type="text/javascript"></script>
+	<script src="aliens.js" type="text/javascript"></script>
   </body>
 </html>

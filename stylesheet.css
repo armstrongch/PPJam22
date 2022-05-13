@@ -77,3 +77,8 @@ div {
 	display: flex;
 	justify-content: center;
 }
+
+.alien_image {
+	max-width: 25vw;
+	display: inline-block;
+}
