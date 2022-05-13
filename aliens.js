@@ -1,10 +1,25 @@
 var aliens = 
 {
-	//frogs: give more land for food
-	//squids: demand tribute or declare war
-	//ducks: eat carbon for food
-	get_alien_info: function()
+	process_alien_trades: function()
 	{
-		var frogling_html = "";
+		if ($('input[name="frog_trade"]:checked').val() == 'accept')
+		{
+			actions['accept_frog_trade'].redemption_function(-1);
+		}
+		
+		if ($('input[name="squid_trade"]:checked').val() == 'accept')
+		{
+			actions['accept_squid_trade'].redemption_function(-1);
+		}
+		else
+		{
+			actions['reject_squid_trade'].redemption_function(-1);
+		}
+		
+		if ($('input[name="duck_trade"]:checked').val() == 'accept')
+		{
+			actions['accept_duck_trade'].redemption_function(-1);
+		}
+		game.load_state('action_state');
 	}
 };

@@ -43,6 +43,13 @@ var map =
 		list_item.AddListItemsToRow('map', map.terrain_list, 'item_image_full');
 	},
 	
+	add_terrain: function(new_type)
+	{
+		var new_terrain = terrain.new_terrain(new_type, this.terrain_list.length)
+		this.terrain_list.push(new_terrain);
+		list_item.AddListItemsToRow('map', map.terrain_list, 'item_image_full');
+	},
+	
 	terrain_count: function(type)
 	{
 		var count = 0;

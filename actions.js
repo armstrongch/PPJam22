@@ -104,6 +104,22 @@ var actions =
 			function(terrain_index) { /*do nothing*/ },
 			""
 		);
+		
+		this.accept_frog_trade = this.new_action_ext( "", "", 0, 0, function() { return true; },
+			function(terrain_index)
+			{
+				game_stats.food -= 90;
+				for (let i = 0; i < 4; i += 1)
+				{
+					map.add_terrain(terrain_types.field);
+				}
+			}, ""
+		);
+		
+		this.accept_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.food -= 40; }, "");
+		this.reject_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.impending_squid_war = true; }, "");
+		
+		this.accept_duck_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.wood -= 50; game_stats.carbon -= 20; }, "");
 	}
 };
 

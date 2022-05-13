@@ -6,6 +6,7 @@ var game_stats =
 	carbon: 0,
 	days_until_winter: 20,
 	target_food: 60,
+	impending_squid_war: false,
 	
 	show_game_info: function()
 	{
