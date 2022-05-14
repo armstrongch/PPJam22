@@ -25,6 +25,12 @@ var game_stats =
 	{
 		var year_end_html = `<p>Year ${this.year} complete. You produced ${this.food} of the required ${this.target_food} food.</p>`;
 		
+		if (this.wood < 0)
+		{
+			year_end_html += `<p>You still owe ${Math.abs(this.wood)} wood to the duckling colony. Your debt has increased by 15 wood.</p>`;
+			this.wood -= 15;
+		}
+		
 		if (this.food < this.target_food)
 		{
 			year_end_html += "<p>The pumpkin planet will not be the the fresh start that humanity had hoped for.</p>";

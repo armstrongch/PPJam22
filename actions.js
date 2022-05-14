@@ -5,10 +5,10 @@ var actions =
 		var eligible_function = function() { return (game_stats.wood >= this.wood_cost || this.wood_cost == 0) && (game_stats.food >= this.food_cost || this.food_cost == 0); };
 		var special_redemption_function = function(terrain_index) { map.replace_terrain(terrain_index, transform_type); };
 		
-		return this.new_action_ext(name, desc, wood_cost, food_cost, eligible_function, special_redemption_function, "");
+		return this.new_action_ext(name, desc, wood_cost, food_cost, eligible_function, special_redemption_function, "", true);
 	},
 	
-	new_action_ext: function(name, desc, wood_cost, food_cost, eligible_function, special_redemption_function, custom_requires_text)
+	new_action_ext: function(name, desc, wood_cost, food_cost, eligible_function, special_redemption_function, custom_requires_text, subtract_one_day)
 	{
 		return {
 			name: name,
@@ -23,7 +23,7 @@ var actions =
 				$('#daily_action_log').html('');
 				game_stats.wood -= this.wood_cost;
 				game_stats.food -= this.food_cost;
-				game_stats.days_until_winter -= 1;
+				if (subtract_one_day) { game_stats.days_until_winter -= 1; }
 				this.special_redemption_function(terrain_index);
 				map.perform_daily_actions();
 				game_stats.show_game_info();
@@ -74,37 +74,43 @@ var actions =
 			"Harvest Wood", "Produces 1 wood per settlement.", 0, 0,
 			function() { return map.terrain_count(terrain_types.forest) > 0 && map.terrain_count(terrain_types.settlement) > 0; },
 			function() { game_stats.wood += map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("You harvested some wood."); },
-			"Requires at least 1 settlement and 1 forest."
+			"Requires at least 1 settlement and 1 forest.",
+			true
 		);
 		
 		this.collect_pumpkins = this.new_action_ext(
 			"Harvest Pumpkins", "Produces 1 food per settlement.", 0, 0,
 			function() { return map.terrain_count(terrain_types.pumpkin_patch) > 0 && map.terrain_count(terrain_types.settlement) > 0; },
 			function() { game_stats.food += map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("You harvested some pumpkins."); },
-			"Requires at least 1 settlement and 1 pumpkin patch."
+			"Requires at least 1 settlement and 1 pumpkin patch.",
+			true
 		);
 		
 		this.consume_forest = this.new_action_ext(
 			"Consume Forest", "Destroys the forest, producing 15 wood.", 0, 0,
 			function() { return true; },
 			function(terrain_index) { game_stats.wood += 15; map.replace_terrain(terrain_index, terrain_types.crater); game_stats.write_to_action_log("You consumed a forest."); },
-			""
+			"",
+			true
 		);
 		
 		this.consume_pumpkin_patch = this.new_action_ext(
 			"Consume Pumpkin Patch", "Destroys the pumpkin patch, producing 30 food.", 0, 0,
 			function() { return true; },
 			function(terrain_index) { game_stats.food += 30; map.replace_terrain(terrain_index, terrain_types.crater); game_stats.write_to_action_log("You consumed a pumpkin patch."); },
-			""
+			"",
+			true
 		);
 		
 		this.do_nothing = this.new_action_ext(
 			"Do Nothing", "Does Nothing", 0, 0,
 			function() { return true; },
 			function(terrain_index) { /*do nothing*/ },
-			""
+			"",
+			true
 		);
 		
+		//all the alien options need to bump the days until winter to offset
 		this.accept_frog_trade = this.new_action_ext( "", "", 0, 0, function() { return true; },
 			function(terrain_index)
 			{
@@ -113,13 +119,17 @@ var actions =
 				{
 					map.add_terrain(terrain_types.field);
 				}
-			}, ""
+			}, "", false
 		);
 		
-		this.accept_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.food -= 40; }, "");
-		this.reject_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.impending_squid_war = true; }, "");
+		this.accept_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.food -= 40; }, "", false);
+		this.reject_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.impending_squid_war = true; }, "", false);
 		
-		this.accept_duck_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.wood -= 50; game_stats.carbon -= 20; }, "");
+		this.accept_duck_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) {
+				game_stats.wood -= 50;
+				game_stats.carbon -= 20;
+				game_stats.days_until_winter += 4;
+			}, "", false);
 	}
 };
 
