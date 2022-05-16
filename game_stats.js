@@ -71,7 +71,7 @@ var game_stats =
 			if (this.days_until_winter > 0)
 			{
 				this.year += 1;
-				year_end_html += `<p><button onclick="game.load_state('aliens_negotiations')">Begin Year ${this.year}</button></p>`;
+				year_end_html += `<p><button onclick="game_state_manager.load_state_ext('aliens_negotiations')">Begin Year ${this.year}</button></p>`;
 			}
 			else
 			{

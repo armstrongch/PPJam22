@@ -20,6 +20,6 @@ var aliens =
 		{
 			actions['accept_duck_trade'].redemption_function(-1);
 		}
-		game.load_state('action_state');
+		game_state_manager.load_state_ext('action_state');
 	}
 };

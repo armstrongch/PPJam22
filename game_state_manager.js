@@ -18,9 +18,15 @@ var game_state_manager =
 		game.aliens_negotiations = ['alien_images', 'alien_input', 'settings'];
 	},
 	
+	load_state_ext: function(state)
+	{
+		//pumpkin_save.current_state = state;
+		game.load_state(state);
+	},
+	
 	setup_page: function()
 	{
-		game.load_state('loading_state');
+		game_state_manager.load_state_ext('loading_state');
 		save.initialize_save('pumpkin_planet');
 		map.initialize();
 		actions.setup_actions();
@@ -50,11 +56,13 @@ var game_state_manager =
 	{
 		clearInterval(sound_manager.load_fail_interval);
 		sound_manager.load_fail_interval = null;
-		game.load_state('title_state');
+		game_state_manager.load_state_ext('title_state');
 	},
 
 	begin_game_button: function()
 	{
-		game.load_state('intro_state');
-	},
+		game_state_manager.load_state_ext('intro_state');
+		//pumpkin_save.load();
+		//pumpkin_save.save();
+	}
 };

@@ -113,7 +113,7 @@ var terrain =
 			action_content += `<p><button ${disabled_onclick}>${action.name}: ${action.desc} - <span style="color: var(--${disabled_styling})">${requires_text}</span></button></p>`;
 		}			
 		$('#action_content').html(action_content);
-		game.load_state('confirm_action_state');
+		game_state_manager.load_state_ext('confirm_action_state');
 	},
 };
 

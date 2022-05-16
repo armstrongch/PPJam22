@@ -19,10 +19,9 @@
 				<h1>Bounty of the Pumpkin Planet</h1>
 				<p>A game by Chris 'Turd Boomerang' Armstrong</p>
 				<button onclick="game_state_manager.begin_game_button()">Begin</button>
-				<span id='load_button'></span>
+				<span id='load_button' style='display: none'></span>
 				<p>To-Do List:</p>
 				<ul>
-					<li>Add Saving/Loading</li>
 					<li>Add Sound/Music</li>
 					<li>Add Title Screen Art</li>
 					<li>Add Game Ending</li>
@@ -37,7 +36,7 @@
 				<p>After many years of space travel, your weary band of colonists has arrived on the pumpkin planet. Nearly identical to Earth, this long-sought-after heavenly body will be the perfect place for the human race to begin anew. Your task is to gather enough food to sustain your colony until the rest of your species arrives with additional gear and resources, in five years' time.</p>
 				<p>Take heed: although your terraforming technology is powerful and flexible, it is not easy to reverse the process. Anything you build on the planet's surface will be <i>permanent</i>.</p>
 				<p>Good luck, and may the stars guide you!</p>
-				<button onclick="game.load_state('action_state')">Continue</button>
+				<button onclick="game_state_manager.load_state_ext('action_state')">Continue</button>
 			</td>
 		</tr>
 		</tr>
@@ -120,7 +119,7 @@
 				<span id='action_content'>
 					<!--Generated Content Goes Here-->	
 				</span>
-				<button onclick="game.load_state('action_state')">Cancel</button>
+				<button onclick="game_state_manager.load_state_ext('action_state')">Cancel</button>
 			</td>
 		</tr>
 		<tr id='settings'>
@@ -129,7 +128,7 @@
 					Settings:
 					<input disabled type='checkbox' id='sound_checkbox' onchange='sound_manager.play_sound_by_name("click")'></input> <label for='sound_checkbox'>Sound</label>
 					<input disabled type='checkbox' id='music_checkbox' onchange='sound_manager.music_toggle_change()'></input> <label for='music_checkbox'>Music</label>
-					<span id='save_button'></span>
+					<span id='save_button' style='display: none'></span>
 				</p>
 				<span id='failed_to_load'></span>
 			</td>
@@ -156,5 +155,6 @@
 	<script src="game_stats.js" type="text/javascript"></script>
 	<script src="utility.js" type="text/javascript"></script>
 	<script src="aliens.js" type="text/javascript"></script>
+	<script src="pumpkin_save.js" type="text/javascript"></script>
   </body>
 </html>

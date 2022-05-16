@@ -29,13 +29,14 @@ var actions =
 				game_stats.show_game_info();
 				if (game_stats.days_until_winter > 0)
 				{
-					game.load_state('action_state');
+					game_state_manager.load_state_ext('action_state');
 				}
 				else
 				{
 					game_stats.show_year_end_info();
-					game.load_state('year_end_state');
+					game_state_manager.load_state_ext('year_end_state');
 				}
+				//pumpkin_save.save();
 			}
 		};
 	},
