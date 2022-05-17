@@ -152,6 +152,7 @@ var war =
 						return_html += " A friendly " + t.terrain_name.toLowerCase() + " was destroyed.</p>";
 						map.replace_terrain(random_indexes[i], terrain_types.crater);
 						casualties = true;
+						i = random_indexes.length;
 					}
 				}
 				if (!casualties)
