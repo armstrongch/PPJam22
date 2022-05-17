@@ -68,12 +68,12 @@
 					<label for="ftr">Reject</label>
 					<input type="radio" name ="frog_trade" id="ftr" value="reject"  checked="checked">
 					
-					<p>The squidlings are constructing weapons of war. Will you pay them 40 food as tribute at the end of the upcoming harvest season?</p>
+					<p>The squidlings are constructing weapons of war. Will you pay them <span id='tribute_value'>x</span> food as tribute at the end of the upcoming harvest season?</p>
 				  
-					<label for="sta">Pay Tribute</label>
+					<label for="sta">Pay</label>
 					<input type="radio" name ="squid_trade" id="sta" value="accept">
 					
-					<label for="str">Prepare for War</label>
+					<label for="str">Don't Pay</label>
 					<input type="radio" name ="squid_trade" id="str" value="reject" checked="checked">
 					
 					<p>The ducklings are perfecting a new carbon-reduction technology. They are willing to reduce your carbon by 20 in exchange for 50 wood at the end of the upcoming harvest. This will lengthen the season by 4 days.</p>
@@ -88,11 +88,41 @@
 				<p><button onclick='aliens.process_alien_trades()'>Continue</button></p>
 			</td>
 		</tr>
+		<tr id='alien_war_text'>
+			<td colspan='12'>
+				<p>You have <span id='player_military'>x</span> military strength. The squidlings have <span id='squid_military'>y</span> military strength. You can allocate forces to defend your districts, and attack enemy districts.</p>
+				<p>You have <span id='unallocated_military'>z</span> unallocated forces.</p>
+				<p><button onclick="war.reset_allocations()">Reset Allocated Forces</button></p>
+				<p><button onclick="war.calculate_results()">Go to War</button></p>
+			</td>
+		</tr>
+		<tr id='alien_war_districts'>
+			<td colspan='4'>
+				<p>Agricultural District: Contains fields, forests, and pumpkin patches.</p>
+				<p><button onclick="war.allocate('agricultural', 'defenders')">Allocate Defenders (<span id='ag_def_count'>a</span>)</button></p>
+				<p><button onclick="war.allocate('agricultural', 'attackers')">Allocate Attackers (<span id='ag_atk_count'>b</span>)</button></p>
+			</td>
+			<td colspan='4'>
+				<p>Industrial District: Contains factories, mines and barracks.</p>
+				<p><button onclick="war.allocate('industrial', 'defenders')">Allocate Defenders (<span id='ind_def_count'>c</span>)</button></p>
+				<p><button onclick="war.allocate('industrial', 'attackers')">Allocate Attackers (<span id='ind_atk_count'>d</span>)</button></p>
+			</td>
+			<td colspan='4'>
+				<p>Residential District: Contains settlements.</p>
+				<p><button onclick="war.allocate('residential', 'defenders')">Allocate Defenders (<span id='res_def_count'>e</span>)</button></p>
+				<p><button onclick="war.allocate('residential', 'attackers')">Allocate Attackers (<span id='res_atk_count'>f</span>)</button></p>
+			</td>
+		</tr>
+		<tr id='alien_war_results'>
+			<td colspan='12'>
+				<span id='war_results_span'></span>
+			</td>
+		</tr>
 		<tr id='game_info'>
 			<td colspan='12'>
 				<p>Gather <span id='target_food_span'></span> food before winter!</p>
 				<p id='game_info_p'>
-					<!--Generated Content Goes Here-->	
+					<!--Generated Content Goes Here-->
 				</p>
 				<p><button onclick="actions['do_nothing'].redemption_function(-1)">Do Nothing</button></p>
 				<span id='daily_action_log'>
@@ -155,6 +185,7 @@
 	<script src="game_stats.js" type="text/javascript"></script>
 	<script src="utility.js" type="text/javascript"></script>
 	<script src="aliens.js" type="text/javascript"></script>
-	<script src="pumpkin_save.js" type="text/javascript"></script>
+	<script src="war.js" type="text/javascript"></script>
+	<!--<script src="pumpkin_save.js" type="text/javascript"></script>-->
   </body>
 </html>

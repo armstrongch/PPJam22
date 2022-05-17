@@ -1,6 +1,8 @@
 //This file is part of the game content, NOT part of the template
 var game_state_manager =
 {
+	reload_action_state: true,
+	
 	setup_game: function()
 	{
 		this.init_states();
@@ -16,11 +18,16 @@ var game_state_manager =
 		game.confirm_action_state = ['game_info','action_confirmation', 'settings'];
 		game.year_end_state = ['year_end', 'settings'];
 		game.aliens_negotiations = ['alien_images', 'alien_input', 'settings'];
+		game.war = ['alien_war_text', 'alien_war_districts', 'settings'];
+		game.post_war = ['alien_war_results', 'settings'];
 	},
 	
 	load_state_ext: function(state)
 	{
-		//pumpkin_save.current_state = state;
+		if (state == 'aliens_negotiations')
+		{
+			aliens.setup_trades();
+		}
 		game.load_state(state);
 	},
 	

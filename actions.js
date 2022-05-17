@@ -23,13 +23,20 @@ var actions =
 				$('#daily_action_log').html('');
 				game_stats.wood -= this.wood_cost;
 				game_stats.food -= this.food_cost;
-				if (subtract_one_day) { game_stats.days_until_winter -= 1; }
+				if (subtract_one_day) {
+					game_stats.days_until_winter -= 1;
+					aliens.squid_military.develop();
+				}
 				this.special_redemption_function(terrain_index);
 				map.perform_daily_actions();
 				game_stats.show_game_info();
+				
 				if (game_stats.days_until_winter > 0)
 				{
-					game_state_manager.load_state_ext('action_state');
+					if (game_state_manager.reload_action_state)
+					{
+						game_state_manager.load_state_ext('action_state');
+					}
 				}
 				else
 				{
@@ -87,6 +94,30 @@ var actions =
 			true
 		);
 		
+		this.increase_military = this.new_action_ext(
+			"Prepare for War", "Increases military strength by 1 per settlement", 0, 0,
+			function() { return map.terrain_count(terrain_types.settlement) > 0; },
+			function() { game_stats.military += map.terrain_count(terrain_types.settlement); game_stats.write_to_action_log("Your military strength increases."); },
+			"Requires at least 1 settlement and 1 barracks.",
+			true
+		);
+		
+		this.scout = this.new_action_ext(
+			"Gather Intel", "Sends scouts into squidling territory to assess their military strength.", 0, 0,
+			function() { return true; },
+			function() { game_stats.write_to_action_log(aliens.squid_military.get_info()); },
+			"Requires at least 1 barracks.",
+			true
+		);
+		
+		this.declare_war = this.new_action_ext(
+			"Declare War", "Initiate a military conflict against the squidling colony to the north.", 0, 0,
+			function() { return game_stats.military >= 1; },
+			function() { war.load_content(); },
+			"Requires at least 1 military strength.",
+			true
+		);
+		
 		this.consume_forest = this.new_action_ext(
 			"Consume Forest", "Destroys the forest, producing 15 wood.", 0, 0,
 			function() { return true; },
@@ -123,7 +154,7 @@ var actions =
 			}, "", false
 		);
 		
-		this.accept_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.food -= 40; }, "", false);
+		this.accept_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.food -= game_stats.year*20; }, "", false);
 		this.reject_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.impending_squid_war = true; }, "", false);
 		
 		this.accept_duck_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) {

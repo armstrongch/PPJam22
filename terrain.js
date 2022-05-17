@@ -17,6 +17,9 @@ var terrain =
 			case terrain_types.barracks:
 				t.terrain_name = "Barracks";
 				t.image_file_name = "barracks.png";
+				t.actions.push("increase_military");
+				t.actions.push("scout");
+				t.actions.push("declare_war");
 				break;
 			case terrain_types.crater:
 				t.terrain_name = "Crater";

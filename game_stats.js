@@ -7,11 +7,13 @@ var game_stats =
 	days_until_winter: 20,
 	target_food: 60,
 	impending_squid_war: false,
+	military: 0,
+	squid_strength: 0,
 	
 	show_game_info: function()
 	{
 		$('#game_info_p').html(
-			`Year: ${this.year}&emsp;Food: ${this.food}&emsp;Wood: ${this.wood}&emsp;Carbon: ${this.carbon}&emsp;Days Until Winter: ${this.days_until_winter}`
+			`Year: ${this.year}&emsp;Food: ${this.food}&emsp;Wood: ${this.wood}&emsp;Carbon: ${this.carbon}&emsp;Military Might: ${this.military}&emsp;Days Until Winter: ${this.days_until_winter}`
 		);
 		$('#target_food_span').text(this.target_food);
 	},
