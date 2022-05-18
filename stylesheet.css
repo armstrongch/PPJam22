@@ -82,3 +82,8 @@ div {
 	max-width: 25vw;
 	display: inline-block;
 }
+
+.war_outline_span {
+	border-bottom: 1px solid var(--white_color);
+	display: block;
+}

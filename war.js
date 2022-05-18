@@ -115,10 +115,13 @@ var war =
 		game_stats.military = this.available_military;
 		total_battle_html = "";
 		
+		
+		total_battle_html += "<h3>Defending your Colony:</h3>";
 		total_battle_html += this.resolve_battle('player', 'agricultural', [terrain_types.field, terrain_types.forest, terrain_types.young_forest, terrain_types.pumpkin_patch]);
 		total_battle_html += this.resolve_battle('player', 'industrial', [terrain_types.factory, terrain_types.mine, terrain_types.barracks]);
 		total_battle_html += this.resolve_battle('player', 'residential', [terrain_types.settlement]);
 		
+		total_battle_html += "<h3>Attacking the Squidling Colony:</h3>";
 		total_battle_html += this.resolve_battle('squid', 'agricultural', "pumpkin patch");
 		total_battle_html += this.resolve_battle('squid', 'industrial', "barracks");
 		total_battle_html += this.resolve_battle('squid', 'residential', "settlement");
@@ -130,7 +133,8 @@ var war =
 	
 	resolve_battle: function(colony, district, associated_terrain)
 	{
-		var return_html = "";
+		var district_name_upper = district.charAt(0).toUpperCase() + district.slice(1);
+		var return_html = `<div class='war_outline_span'><p>${district_name_upper} District:</p>`;
 		
 		var random_indexes = [];
 		for (let i = 0; i < map.terrain_list.length; i += 1) { random_indexes.push(i); }
@@ -138,11 +142,12 @@ var war =
 		
 		if (colony == 'player')
 		{
-			return_html += `<p>You stationed ${this.player_allocations[district].defenders} soldiers to defend your ${district} district. The squidlings sent ${this.squid_allocations[district].attackers} soldiers to attack.`;
+			//return_html += `<p>You stationed ${this.player_allocations[district].defenders} soldiers to defend your ${district} district. The squidlings sent ${this.squid_allocations[district].attackers} soldiers to attack.`;
+			return_html += `<p>${this.player_allocations[district].defenders} x <img src="./Images/soldiers.png" class='alien_image'> vs. <img src="./Images/squid_soldiers.png" class='alien_image'> x ${this.squid_allocations[district].attackers}<p>`;
 			
 			if (this.player_allocations[district].defenders >= this.squid_allocations[district].attackers)
 			{
-				return_html += " Your defenses held!</p>";
+				return_html += "<p>Your defenses held!</p>";
 			}
 			else
 			{
@@ -153,7 +158,7 @@ var war =
 					
 					if (associated_terrain.includes(t.type))
 					{
-						return_html += " A friendly " + t.terrain_name.toLowerCase() + " was destroyed.</p>";
+						return_html += "<p>A friendly " + t.terrain_name.toLowerCase() + " was destroyed.</p>";
 						map.replace_terrain(random_indexes[i], terrain_types.crater);
 						casualties = true;
 						i = random_indexes.length;
@@ -161,13 +166,14 @@ var war =
 				}
 				if (!casualties)
 				{
-					return_html += " There were no friendly casualties.</p>";
+					//return_html += " There were no friendly casualties.</p>";
 				}
 			}
 		}
 		else
 		{
-			return_html += `<p>You sent ${this.player_allocations[district].attackers} soldiers to attack the squidlings' ${district} district, defended by ${this.squid_allocations[district].defenders} soldiers.`;
+			//return_html += `<p>You sent ${this.player_allocations[district].attackers} soldiers to attack the squidlings' ${district} district, defended by ${this.squid_allocations[district].defenders} soldiers.`;
+			return_html += `<p>${this.player_allocations[district].attackers} x <img src="./Images/soldiers.png" class='alien_image'> vs. <img src="./Images/squid_soldiers.png" class='alien_image'> x ${this.squid_allocations[district].defenders}<p>`;
 			
 			if (this.player_allocations[district].attackers <= this.squid_allocations[district].defenders)
 			{
@@ -190,6 +196,8 @@ var war =
 				}
 			}
 		}
+		
+		return_html += "</div>";
 		
 		return return_html;
 	},
