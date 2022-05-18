@@ -35,8 +35,11 @@ var actions =
 				{
 					if (game_stats.days_until_winter > 0)
 					{
-						
 						game_state_manager.load_state_ext('action_state');
+					}
+					else if (game_stats.impending_squid_war)
+					{
+						game_state_manager.load_state_ext('pre_war');
 					}
 					else
 					{
@@ -116,7 +119,7 @@ var actions =
 			function() { return game_stats.military >= 1; },
 			function() { war.load_content(); },
 			"Requires at least 1 military strength.",
-			true
+			false
 		);
 		
 		this.consume_forest = this.new_action_ext(
@@ -141,6 +144,15 @@ var actions =
 			function(terrain_index) { /*do nothing*/ },
 			"",
 			true
+		);
+		
+		//Same as "Do Nothing", but does not use a day of time.
+		this.do_nothing_no_time = this.new_action_ext(
+			"", "", 0, 0,
+			function() { return true; },
+			function(terrain_index) { /*do nothing*/ },
+			"",
+			false
 		);
 		
 		//all the alien options need to bump the days until winter to offset

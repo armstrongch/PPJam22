@@ -192,5 +192,33 @@ var war =
 		}
 		
 		return return_html;
+	},
+	
+	get_default_allocations: function()
+	{
+		return {
+			agricultural: {
+				attackers: 0,
+				defenders: 0,
+			},
+			industrial: {
+				attackers: 0,
+				defenders: 0,
+			},
+			residential: {
+				attackers: 0,
+				defenders: 0,
+			}
+		};
+	},
+	
+	resume_game: function()
+	{
+		game_stats.impending_squid_war = false;
+		this.available_military = 0;
+		this.player_allocations = this.get_default_allocations();
+		this.squid_allocations = this.get_default_allocations();
+		game_state_manager.reload_action_state = true;
+		actions.do_nothing_no_time.redemption_function(-1);
 	}
 };

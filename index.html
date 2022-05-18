@@ -28,7 +28,7 @@
 					<li>Add Game Ending</li>
 					<li>Test and balance different playstyles</li>
 					<li>Quality-of-Life - Hotkeys and/or Automated Action Repetition</li>
-					<li>Implement Squid War</li>
+					<li>Move debts to a separate counter, to prevent negative resources</li>
 				</ul>
 			</td>
 		</tr>
@@ -89,6 +89,13 @@
 				<p><button onclick='aliens.process_alien_trades()'>Continue</button></p>
 			</td>
 		</tr>
+		<tr id='squid_war_text'>
+			<td colspan='12'>
+				<p>The squidlings have opted to produce weapons instead of food. For your refusal to pay their tribute, they have declared war upon your colony!</p><br/>
+				<img src="./Images/alien_squid.png" class='alien_image'><br/>
+				<button onclick="actions.declare_war.redemption_function(-1)">Continue</button>
+			</td>
+		</tr>
 		<tr id='alien_war_text'>
 			<td colspan='12'>
 				<p>You have <span id='player_military'>x</span> military strength. The squidlings have <span id='squid_military'>y</span> military strength. You can allocate forces to defend your districts, and attack enemy districts.</p>
@@ -120,7 +127,10 @@
 		</tr>
 		<tr id='alien_war_results'>
 			<td colspan='12'>
-				<span id='war_results_span'></span>
+				<span id='war_results_span'>
+					<!--Generated Content Goes Here-->
+				</span>
+				<p><button onclick='war.resume_game()'>Continue</button></p>
 			</td>
 		</tr>
 		<tr id='game_info'>

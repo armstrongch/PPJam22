@@ -18,6 +18,7 @@ var game_state_manager =
 		game.confirm_action_state = ['game_info','action_confirmation', 'settings'];
 		game.year_end_state = ['year_end', 'settings'];
 		game.aliens_negotiations = ['alien_images', 'alien_input', 'settings'];
+		game.pre_war = ['squid_war_text', 'settings'];
 		game.war = ['alien_war_text', 'war_district_1', 'war_district_2', 'war_district_3', 'settings'];
 		game.post_war = ['alien_war_results', 'settings'];
 	},
