@@ -117,7 +117,7 @@ var war =
 		
 		total_battle_html += this.resolve_battle('player', 'agricultural', [terrain_types.field, terrain_types.forest, terrain_types.young_forest, terrain_types.pumpkin_patch]);
 		total_battle_html += this.resolve_battle('player', 'industrial', [terrain_types.factory, terrain_types.mine, terrain_types.barracks]);
-		total_battle_html += this.resolve_battle('player', 'residential', [terrain_types.barracks]);
+		total_battle_html += this.resolve_battle('player', 'residential', [terrain_types.settlement]);
 		
 		total_battle_html += this.resolve_battle('squid', 'agricultural', "pumpkin patch");
 		total_battle_html += this.resolve_battle('squid', 'industrial', "barracks");
@@ -167,7 +167,7 @@ var war =
 		}
 		else
 		{
-			return_html += `<p>You sent ${this.player_allocations[district].attackers} soldiers to defend the squidlings' ${district} district, defended by ${this.squid_allocations[district].defenders} soldiers.`;
+			return_html += `<p>You sent ${this.player_allocations[district].attackers} soldiers to attack the squidlings' ${district} district, defended by ${this.squid_allocations[district].defenders} soldiers.`;
 			
 			if (this.player_allocations[district].attackers <= this.squid_allocations[district].defenders)
 			{
