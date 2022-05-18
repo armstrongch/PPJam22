@@ -89,8 +89,18 @@ var game_stats =
 			
 			if (this.days_until_winter > 0)
 			{
-				this.year += 1;
-				year_end_html += `<p><button onclick="game_state_manager.load_state_ext('aliens_negotiations')">Begin Year ${this.year}</button></p>`;
+				if (this.year >= 5)
+				{
+					year_end_html += "<h3>You have survived your first five years on the pumpkin planet!</h3>";
+					year_end_html += "<p>The second wave of human settlers has arrived. Your species will live on for generations to come!</p>";
+					year_end_html += "<p>Thanks for playing!</p>";
+					year_end_html += "<p><button onclick='location.reload()'>Try Again</button></p>";
+				}
+				else
+				{
+					this.year += 1;
+					year_end_html += `<p><button onclick="game_state_manager.load_state_ext('aliens_negotiations')">Begin Year ${this.year}</button></p>`;
+				}
 			}
 			else
 			{
