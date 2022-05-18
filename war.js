@@ -119,6 +119,10 @@ var war =
 		total_battle_html += this.resolve_battle('player', 'industrial', [terrain_types.factory, terrain_types.mine, terrain_types.barracks]);
 		total_battle_html += this.resolve_battle('player', 'residential', [terrain_types.barracks]);
 		
+		total_battle_html += this.resolve_battle('squid', 'agricultural', "pumpkin patch");
+		total_battle_html += this.resolve_battle('squid', 'industrial', "barracks");
+		total_battle_html += this.resolve_battle('squid', 'residential', "settlement");
+		
 		$('#war_results_span').html(total_battle_html);
 		game_state_manager.load_state_ext('post_war');
 		game_state_manager.reload_action_state = false;
@@ -134,7 +138,7 @@ var war =
 		
 		if (colony == 'player')
 		{
-			return_html += `<p>You allocated ${this.player_allocations[district].defenders} soldiers to defend your ${district} district. The squidlings sent ${this.squid_allocations[district].attackers} soldiers to attack.`;
+			return_html += `<p>You stationed ${this.player_allocations[district].defenders} soldiers to defend your ${district} district. The squidlings sent ${this.squid_allocations[district].attackers} soldiers to attack.`;
 			
 			if (this.player_allocations[district].defenders >= this.squid_allocations[district].attackers)
 			{
@@ -158,6 +162,31 @@ var war =
 				if (!casualties)
 				{
 					return_html += " There were no friendly casualties.</p>";
+				}
+			}
+		}
+		else
+		{
+			return_html += `<p>You sent ${this.player_allocations[district].attackers} soldiers to defend the squidlings' ${district} district, defended by ${this.squid_allocations[district].defenders} soldiers.`;
+			
+			if (this.player_allocations[district].attackers <= this.squid_allocations[district].defenders)
+			{
+				return_html += " The defenders held their ground.</p>";
+			}
+			else
+			{
+				return_html += " You destroyed an enemy " + associated_terrain + ".";
+				switch(associated_terrain)
+				{
+					case "settlement":
+						aliens.squid_military.settlement_count = Math.max(aliens.squid_military.settlement_count-1, 0);
+						break;
+					case "pumpkin patch":
+						aliens.squid_military.patch_count = Math.max(aliens.squid_military.patch_count-1, 0);
+						break;
+					case "barracks":
+						aliens.squid_military.barracks_count = Math.max(aliens.squid_military.barracks_count-1, 0);
+						break;
 				}
 			}
 		}
