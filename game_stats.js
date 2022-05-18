@@ -5,10 +5,13 @@ var game_stats =
 	wood: 0,
 	carbon: 0,
 	days_until_winter: 20,
-	target_food: 60,
+	
 	impending_squid_war: false,
 	military: 0,
-	squid_strength: 0,
+	
+	target_food: 60,
+	base_target_food: 60,
+	target_wood: 0,
 	
 	show_game_info: function()
 	{
@@ -16,6 +19,11 @@ var game_stats =
 			`Year: ${this.year}&emsp;Food: ${this.food}&emsp;Wood: ${this.wood}&emsp;Carbon: ${this.carbon}&emsp;Military Might: ${this.military}&emsp;Days Until Winter: ${this.days_until_winter}`
 		);
 		$('#target_food_span').text(this.target_food);
+		
+		if (this.target_wood > 0)
+		{
+			$('#target_wood_span').text(`and ${this.target_wood} wood `);
+		}
 	},
 	
 	write_to_action_log: function(text)
@@ -27,10 +35,19 @@ var game_stats =
 	{
 		var year_end_html = `<p>Year ${this.year} complete. You produced ${this.food} of the required ${this.target_food} food.</p>`;
 		
-		if (this.wood < 0)
+		if (this.target_wood > 0)
 		{
-			year_end_html += `<p>You still owe ${Math.abs(this.wood)} wood to the duckling colony. Your debt has increased by 15 wood.</p>`;
-			this.wood -= 15;
+			if (this.wood < this.target_wood)
+			{
+				year_end_html += `<p>You still owe ${Math.abs(this.wood)} wood to the duckling colony. Your debt has increased by 15 wood.</p>`;
+				this.target_wood += 15;
+			}
+			else
+			{
+				year_end_html += `<p>You have completely repaid your debt of ${this.target_wood} wood to the ducklings.</p>`
+				this.wood -= this.target_wood;
+				this.target_wood = 0;
+			}
 		}
 		
 		if (this.food < this.target_food)
@@ -81,6 +98,7 @@ var game_stats =
 				year_end_html += "<p><button onclick='location.reload()'>Try Again</button></p>";
 			}
 		}
+		this.target_food = this.base_target_food;
 		
 		game_stats.show_game_info();
 		$('#year_end_summary').html(year_end_html);

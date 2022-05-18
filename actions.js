@@ -159,7 +159,7 @@ var actions =
 		this.accept_frog_trade = this.new_action_ext( "", "", 0, 0, function() { return true; },
 			function(terrain_index)
 			{
-				game_stats.food -= 90;
+				game_stats.target_food += 90;
 				for (let i = 0; i < 4; i += 1)
 				{
 					map.add_terrain(terrain_types.field);
@@ -167,11 +167,11 @@ var actions =
 			}, "", false
 		);
 		
-		this.accept_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.food -= game_stats.year*20; }, "", false);
+		this.accept_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.target_food += game_stats.year*20; }, "", false);
 		this.reject_squid_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) { game_stats.impending_squid_war = true; }, "", false);
 		
 		this.accept_duck_trade = this.new_action_ext( "", "", 0, 0, function() { return true; }, function(terrain_index) {
-				game_stats.wood -= 50;
+				game_stats.target_wood += 50;
 				game_stats.carbon -= 20;
 				game_stats.days_until_winter += 4;
 			}, "", false);
