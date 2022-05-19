@@ -35,6 +35,8 @@ var map =
 					terrain.new_terrain(type, i)
 				);
 		}
+		
+		sound_manager.set_track_levels();
 	},
 	
 	replace_terrain: function(terrain_index, new_type)

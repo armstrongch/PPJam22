@@ -29,7 +29,7 @@ var terrain =
 			case terrain_types.factory:
 				t.terrain_name = "Factory";
 				t.image_file_name = "factory.png";
-				t.actions.push("decomission");
+				t.actions.push("decommission");
 				t.daily_action = function()
 				{
 					if (game_stats.wood >= 1)
@@ -51,7 +51,7 @@ var terrain =
 			case terrain_types.mine:
 				t.terrain_name = "Mine";
 				t.image_file_name = "mine.png";
-				t.actions.push("decomission");
+				t.actions.push("decommission");
 				break;
 			
 			case terrain_types.pumpkin_patch:

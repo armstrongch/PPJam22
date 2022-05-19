@@ -60,6 +60,8 @@ var actions =
 					$('#previous_action_text').html(" (" + this.name + ")");
 				}
 				
+				sound_manager.play_sound_by_name('click');
+				sound_manager.set_track_levels();
 				//pumpkin_save.save();
 			}
 		};
@@ -93,8 +95,8 @@ var actions =
 			'create_mine', "Build Mine", "Creates a mine. Mines double the wood and carbon output of factories.", 3, 0, terrain_types.mine
 		);
 		
-		this.decomission = this.new_action(
-			'decomission', "Decomission", "Destroys this building.", 0, 0, terrain_types.crater
+		this.decommission = this.new_action(
+			'decommission', "Decommission", "Destroys this building.", 0, 0, terrain_types.crater
 		);
 		
 		this.collect_wood = this.new_action_ext(

@@ -30,6 +30,7 @@ var game_state_manager =
 			aliens.setup_trades();
 		}
 		game.load_state(state);
+		sound_manager.play_sound_by_name('click');
 	},
 	
 	setup_page: function()
@@ -48,10 +49,10 @@ var game_state_manager =
 	{
 		var audio_list = [];
 		audio_list.push({
-			name: 'music_track_1', file_name: 'placeholder_song.mp3', is_music: true
+			name: 'music_track_1', file_name: 'test_track_1.wav', is_music: true
 		});
 		audio_list.push({
-			name: 'music_track_2', file_name: 'placeholder_song2.mp3', is_music: true
+			name: 'music_track_2', file_name: 'test_track_2.wav', is_music: true
 		});
 		audio_list.push({
 			name: 'click', file_name: 'placeholder_sound.wav', is_music: false
@@ -64,6 +65,8 @@ var game_state_manager =
 	{
 		clearInterval(sound_manager.load_fail_interval);
 		sound_manager.load_fail_interval = null;
+		sound_manager.audio_loading_complete = true;
+		sound_manager.set_track_levels();
 		game_state_manager.load_state_ext('title_state');
 	},
 
@@ -72,5 +75,6 @@ var game_state_manager =
 		game_state_manager.load_state_ext('intro_state');
 		//pumpkin_save.load();
 		//pumpkin_save.save();
+		sound_manager.play_sound_by_name('click');
 	}
 };

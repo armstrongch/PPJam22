@@ -67,6 +67,7 @@ var war =
 			this.available_military -= 1;
 			this.show_allocations();
 		}
+		sound_manager.play_sound_by_name('click');
 	},
 	
 	reset_allocations: function()
@@ -79,6 +80,8 @@ var war =
 		this.player_allocations.residential.defenders = 0;
 		this.player_allocations.residential.attackers = 0;
 		this.show_allocations();
+		
+		sound_manager.play_sound_by_name('click');
 	},
 	
 	allocate_for_squids: function()
@@ -115,7 +118,6 @@ var war =
 		game_stats.military = this.available_military;
 		total_battle_html = "";
 		
-		
 		total_battle_html += "<h3>Defending your Colony:</h3>";
 		total_battle_html += this.resolve_battle('player', 'agricultural', [terrain_types.field, terrain_types.forest, terrain_types.young_forest, terrain_types.pumpkin_patch]);
 		total_battle_html += this.resolve_battle('player', 'industrial', [terrain_types.factory, terrain_types.mine, terrain_types.barracks]);
@@ -129,6 +131,8 @@ var war =
 		$('#war_results_span').html(total_battle_html);
 		game_state_manager.load_state_ext('post_war');
 		game_state_manager.reload_action_state = false;
+		
+		sound_manager.play_sound_by_name('click');
 	},
 	
 	resolve_battle: function(colony, district, associated_terrain)

@@ -62,6 +62,8 @@ var aliens =
 			actions['accept_duck_trade'].redemption_function(-1);
 		}
 		game_state_manager.load_state_ext('action_state');
+		
+		sound_manager.play_sound_by_name('click');
 	},
 	
 	setup_trades: function()
