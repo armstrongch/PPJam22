@@ -87,3 +87,8 @@ div {
 	border-bottom: 1px solid var(--white_color);
 	display: block;
 }
+
+.help_image {
+	max-width: 50px;
+	display: inline-block;
+}

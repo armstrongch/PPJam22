@@ -76,5 +76,23 @@ var game_state_manager =
 		//pumpkin_save.load();
 		//pumpkin_save.save();
 		sound_manager.play_sound_by_name('click');
+	},
+	
+	show_help: function()
+	{
+		$('#show_help_button').css('display', 'none');
+		$('#show_help_button').css('visibility', 'hidden');
+		
+		$('#help_span').css('display', '');
+		$('#help_span').css('visibility', 'visible');
+	},
+	
+	hide_help: function()
+	{
+		$('#show_help_button').css('display', '');
+		$('#show_help_button').css('visibility', 'visible');
+		
+		$('#help_span').css('display', 'none');
+		$('#help_span').css('visibility', 'hidden');
 	}
 };

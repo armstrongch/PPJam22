@@ -17,7 +17,7 @@
 		<tr id='title'>
 			<td colspan='12'>
 				<!--<h1>Bounty of the Pumpkin Planet</h1>-->
-				<img src="Images/title.png" style='display: inline-block'>
+				<img src="./Images/title.png" style='display: inline-block'>
 				<p>A game by Chris 'Turd Boomerang' Armstrong</p>
 				<p>Music by Devin Nelson</p>
 				<button onclick="game_state_manager.begin_game_button()">Begin</button>
@@ -171,6 +171,24 @@
 					<input type='checkbox' id='music_checkbox' onchange='sound_manager.music_toggle_change()'></input> <label for='music_checkbox'>Music</label>
 					<span id='save_button' style='display: none'></span>
 				</p>
+				<p><button id='show_help_button' onclick='game_state_manager.show_help()'>How to Play</button></p>
+				<span id='help_span' style='display: none'>
+					<p><button id='hide_help_button' onclick='game_state_manager.hide_help()'>Hide Help</button></p>
+
+						<p>Every year, there are only 20 days when the climate of the pumpkin planet is suitable for farming.</p>
+						<p>Your goal is to produce 60 food before the end of the harvest season each year.</p>
+						<p>You own 16 plots of land. Click on any plot of land to see its possible uses. Using a plot takes an entire day, and may also require food or wood.</p>
+						<p><img src='./Images/field.png' class='help_image'>Fields are "empty" plots of lands, where you can develop farms and forests, or build residental and industrial buildings.</p>
+						<p><img src='./Images/pumpkin_patch.png' class='help_image'>Pumpkin Patches are sources of food. You can slowly gather pumpkins over time, or consume the patch for a huge one-time food bonus.</p>
+						<p><img src='./Images/forest.png' class='help_image'>Forests are sources of wood.</p>
+						<p><img src='./Images/young_forest.png' class='help_image'>Young forests will grow into forests in the year after they are planted.</p>
+						<p><img src='./Images/settlement.png' class='help_image'>Settlements represent the population of your colony. The more settlements you have, the faster you can farm resources.</p>
+						<p><img src='./Images/factory.png' class='help_image'>Factories will automatically convert wood into food.</p>
+						<p><img src='./Images/mine.png' class='help_image'>Mines increase the productivity of factories.</p>
+						<p><img src='./Images/barracks.png' class='help_image'>Barracks are used to gain military strength and go to war against nearby hostile alien squidlings.</p>
+						<p><img src='./Images/crater.png' class='help_image'>Craters are useless plots of land that are created when a forest or patch is consumed, or a factory is decommissioned.</p>
+				
+				</span>
 				<span id='failed_to_load'></span>
 			</td>
 		</tr>
