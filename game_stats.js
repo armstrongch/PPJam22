@@ -39,8 +39,10 @@ var game_stats =
 		{
 			if (this.wood < this.target_wood)
 			{
-				year_end_html += `<p>You still owe ${Math.abs(this.wood)} wood to the duckling colony. Your debt has increased by 15 wood.</p>`;
+				year_end_html += `<p>You still owe ${Math.abs(this.target_wood)} wood to the duckling colony. Your debt has increased by 15 wood.</p>`;
 				this.target_wood += 15;
+				this.target_wood -= this.wood;
+				this.wood = 0;
 			}
 			else
 			{
